@@ -50,4 +50,33 @@ The project focuses on four business areas:
 - Customer Engagement (Transaction Frequency)
 - Customer Retention (Inactivity Monitoring)
 - Customer Value (Customer Lifetime Value)
+  
+## Key Business Questions
+
+1. Which customers actively use both savings and investment products?
+2. How frequently do customers transact and how can they be segmented by activity level?
+3. Which accounts show signs of inactivity and potential churn?
+4. Which customers generate the highest long-term value?
+
+## Analysis 1: Cross-Sell Opportunities
+
+**Business Problem**
+
+Financial institutions often generate higher customer lifetime value when customers adopt multiple products. The business wanted to identify customers who actively use both savings and investment products in order to uncover cross-selling opportunities and prioritize high-value customer segments.
+
+**Business Question**
+
+Which customers have at least one funded savings plan and one funded investment plan, and how much have they deposited across these products?
+
+**Approach**
+
+To answer this question, I identified customers with funded savings plans and customers with funded investment plans using separate SQL Common Table Expressions (CTEs). The two groups were then combined to identify customers who held both product types. Finally, total deposits were calculated and customers were ranked based on their deposit value.
+
+**SQL Techniques Used**
+
+- Common Table Expressions (CTEs)
+- INNER JOINs
+- Aggregations (COUNT, SUM)
+- Filtering
+- Sorting and Ranking
 
