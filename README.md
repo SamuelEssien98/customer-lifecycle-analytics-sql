@@ -72,7 +72,7 @@ Which customers have at least one funded savings plan and one funded investment 
 
 To answer this question, I identified customers with funded savings plans and customers with funded investment plans using separate SQL Common Table Expressions (CTEs). The two groups were then combined to identify customers who held both product types. Finally, total deposits were calculated and customers were ranked based on their deposit value.
 
-**SQL Techniques Used**
+**Analytical Methods**
 
 - Common Table Expressions (CTEs)
 - INNER JOINs
