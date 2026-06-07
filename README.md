@@ -128,16 +128,29 @@ JOIN users_customuser uc
 
 ORDER BY total_deposits DESC;
 
+**Visualization**
+
+Figure 1: Deposit Contribution by Cross-Sell Customer Tier
+
+Customers who actively used both savings and investment products were segmented into four tiers based on their total deposit value. The chart compares each segment's share of customers against its share of total deposits.
+
+
+
+**Key Insight**
+
+The analysis revealed a significant concentration of deposits among a small segment of customers. While **Strategic Customers represented only 18.6% of cross-sell customers, they contributed approximately 90.0% of total deposits**. Conversely, **Emerging Customers accounted for 56.4% of customers but generated less than 1% of total deposits**.
+
 **Business Value**
 
-Customers who actively use both savings and investment products are typically more engaged and valuable to the business. Identifying this segment helps marketing and relationship management teams focus retention efforts, increase product adoption, and improve customer lifetime value.
+The deposit base is highly concentrated among a relatively small group of multi-product customers. This suggests that not all customers contribute equally to business value and that customer management strategies should be tailored based on deposit behavior and overall contribution. The findings also indicate a strong opportunity to develop customers within the Growth and High Value segments, as these groups collectively represent 25% of customers but contribute less than 10% of total deposits.
 
 **Potential Recommendations**
 
-- Develop targeted campaigns for customers with savings products but no investment products.
-- Create personalized product recommendations based on customer transaction behavior.
-- Prioritize multi-product customers for loyalty and retention initiatives.
-- Monitor deposit trends to identify customers likely to adopt additional financial products.
+- Prioritize Strategic Customers for retention, relationship management, and premium product offerings.
+- Develop targeted engagement programs aimed at moving Growth Customers into the Strategic segment.
+- Analyze the product adoption and transaction behaviors of Strategic Customers to identify characteristics that can be replicated across other customer groups.
+- Monitor customer movement between tiers as a key performance indicator for customer growth and value creation.
+- Reduce concentration risk by increasing the value contribution of Growth and High Value customer segments over time.
 
 ## Analysis 2: Customer Engagement Segmentation
 
@@ -217,7 +230,6 @@ Figure 1: Customer Transaction Frequency Segmentation
 
 Customers were segmented into High Frequency, Medium Frequency, and Low Frequency groups based on their average monthly transaction activity.
 
-https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/4cf8046649994d5a388b0b4446d39a6917305caa/images/Figure%201.png
 
 **Key Insight**
 
@@ -320,7 +332,7 @@ Figure 2: Customer Churn Risk by Product Type
 
 Dormant customers were segmented by inactivity duration and product type to identify where customer disengagement is most prevalent.
 
-https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/8cd65d820f7f16c6ed7edd06e6c69f20b8ebdf05/images/Figure%202.png
+
 
 **Key Insight**
 
