@@ -134,7 +134,7 @@ Figure 1: Deposit Contribution by Cross-Sell Customer Tier
 
 Customers who actively used both savings and investment products were segmented into four tiers based on their total deposit value. The chart compares each segment's share of customers against its share of total deposits.
 
-
+https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/b515d434a899f449242befd8330b206f128ea266/images/Figure%20A.png
 
 **Key Insight**
 
@@ -226,10 +226,11 @@ ORDER BY avg_transactions_per_month DESC;
 
 **Visualization**
 
-Figure 1: Customer Transaction Frequency Segmentation
+Figure 2: Customer Transaction Frequency Segmentation
 
 Customers were segmented into High Frequency, Medium Frequency, and Low Frequency groups based on their average monthly transaction activity.
 
+https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/9ea2e8aaf978b69caa0bddfc6e90fa3d0cc8a1a3/images/Figure%20B.png
 
 **Key Insight**
 
@@ -328,11 +329,11 @@ ORDER BY inactivity_days DESC;
 
 **Visualization**
 
-Figure 2: Customer Churn Risk by Product Type
+Figure 3: Customer Churn Risk by Product Type
 
 Dormant customers were segmented by inactivity duration and product type to identify where customer disengagement is most prevalent.
 
-
+https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/9ea2e8aaf978b69caa0bddfc6e90fa3d0cc8a1a3/images/Figure%20C.png
 
 **Key Insight**
 
@@ -349,3 +350,59 @@ The analysis indicates that inactivity is more pronounced among savings customer
 - Investigate differences in engagement between savings and investment customers to identify behaviors associated with stronger retention.
 - Establish inactivity monitoring dashboards to track churn risk and reactivation performance over time.
 
+## Analysis 4: Customer Lifetime Value Estimation
+
+**Business Problem**
+
+Customer acquisition and retention resources are limited. The business needed a way to estimate which customers generate the highest long-term value in order to prioritize retention efforts and maximize return on customer engagement investments.
+
+**Business Question**
+
+Which customers generate the highest estimated lifetime value based on account tenure and transaction activity?
+
+**Approach**
+
+I combined customer tenure information with transaction history to estimate Customer Lifetime Value (CLV). Account tenure was calculated based on the number of months since customer signup, while transaction volume and estimated profit per transaction were used to project annual customer value.
+
+**Analytical Methods**
+
+- Customer Lifetime Value (CLV) Modeling
+- Date-Based Analysis
+- Customer Profitability Analysis
+- Transaction Aggregation
+- Business Metric Development
+
+**SQL Query**
+
+!q4_sql_code_image.svg
+
+**Visualization**
+
+Figure 4: Customer Lifetime Value Distribution by Segment
+
+Customers were grouped into lifetime value segments based on estimated CLV to understand the distribution of customer value across the platform.
+
+https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/9ea2e8aaf978b69caa0bddfc6e90fa3d0cc8a1a3/images/Figure%20D.png
+
+**Key Insight**
+
+Customer value is highly concentrated among a small subset of customers. Although Top Value customers represent only 6.69% of the customer base, they contribute approximately 78% of total estimated customer lifetime value. In contrast, Low Value customers account for 78.18% of customers but contribute less than 5% of total estimated value.
+
+**Business Value**
+
+The analysis reveals a classic Pareto-like distribution, where a small proportion of customers generates the majority of long-term value. This suggests that customer retention and relationship management efforts should not be distributed evenly across the customer base. Instead, resources should be prioritized toward customers with the highest projected lifetime value.
+
+**Potential Recommendations**
+
+- Develop premium retention programs for Top Value customers.
+- Assign dedicated relationship management resources to high-value customer segments.
+- Analyze behavioral patterns of Top Value customers to improve acquisition targeting.
+- Implement migration strategies to move customers from Low and Medium Value segments into higher-value tiers.
+- Track changes in customer value segments over time as a strategic KPI.
+
+## Key Takeaways
+
+- Customer value is highly concentrated, with Top Value customers contributing 78% of estimated lifetime value despite representing only 6.7% of the customer base.
+- Strategic cross-sell customers account for 90% of total deposits, highlighting the importance of multi-product adoption.
+- More than 85% of customers were classified as low-frequency users, indicating substantial opportunities to improve engagement.
+- Dormant accounts were concentrated within the 1–2 year inactivity range, suggesting that proactive re-engagement initiatives could recover a significant number of customers before permanent churn occurs.
