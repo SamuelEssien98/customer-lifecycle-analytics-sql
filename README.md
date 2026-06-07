@@ -17,6 +17,12 @@ The analysis demonstrates how SQL can be used to transform transactional data in
 
 The dataset represents customer activity on a digital financial services platform and contains information on customer profiles, savings transactions, investment plans, and withdrawals.
 
+## Database Schema (ERD)
+
+The diagram below illustrates the relationship between customers, savings accounts, investment plans, and withdrawal records.
+
+![ERD](images/erd.png)
+
 ### Tables Used
 
 | Table | Description |
@@ -44,3 +50,4 @@ The project focuses on four business areas:
 - Customer Engagement (Transaction Frequency)
 - Customer Retention (Inactivity Monitoring)
 - Customer Value (Customer Lifetime Value)
+
