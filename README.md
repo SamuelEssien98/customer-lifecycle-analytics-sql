@@ -21,7 +21,7 @@ The dataset represents customer activity on a digital financial services platfor
 
 The diagram below illustrates the relationship between customers, savings accounts, investment plans, and withdrawal records.
 
-![ERD](images/erd.png)
+https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/58ca02602b3d35e333679427cb31467028e69eb7/images/ERD.png
 
 ### Tables Used
 
