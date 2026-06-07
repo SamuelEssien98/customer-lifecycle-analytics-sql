@@ -5,7 +5,7 @@
 WITH monthly_transactions AS (
     SELECT
         s.owner_id,
-        DATE_FORMAT(s.transaction_date, '%Y-%m') AS year_month,
+        DATE_FORMAT(s.transaction_date, '%Y-%m') AS 'year_month',
         COUNT(s.id)                               AS transaction_count
 
     FROM savings_savingsaccount s
