@@ -120,3 +120,14 @@ JOIN investment_customers ic
 JOIN users_customuser uc
     ON sc.owner_id = uc.id
 ORDER BY total_deposits DESC;
+
+**Business Value**
+
+Customers who actively use both savings and investment products are typically more engaged and valuable to the business. Identifying this segment helps marketing and relationship management teams focus retention efforts, increase product adoption, and improve customer lifetime value.
+
+**Potential Recommendations**
+
+- Develop targeted campaigns for customers with savings products but no investment products.
+- Create personalized product recommendations based on customer transaction behavior.
+- Prioritize multi-product customers for loyalty and retention initiatives.
+- Monitor deposit trends to identify customers likely to adopt additional financial products.
