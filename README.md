@@ -406,3 +406,6 @@ The analysis reveals a classic Pareto-like distribution, where a small proportio
 - Strategic cross-sell customers account for 90% of total deposits, highlighting the importance of multi-product adoption.
 - More than 85% of customers were classified as low-frequency users, indicating substantial opportunities to improve engagement.
 - Dormant accounts were concentrated within the 1–2 year inactivity range, suggesting that proactive re-engagement initiatives could recover a significant number of customers before permanent churn occurs.
+
+**Link to Notion**
+https://goldenrod-euphonium-cd8.notion.site/Customer-Lifecycle-Analytics-Using-SQL-37861727cfc380f6b356d1dfe72ad425?source=copy_link
