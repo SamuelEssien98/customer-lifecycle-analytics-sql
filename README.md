@@ -233,3 +233,107 @@ Understanding customer engagement patterns enables businesses to tailor marketin
 - Design targeted engagement campaigns for medium-frequency customers to increase activity.
 - Implement reactivation campaigns for low-frequency customers who may be at risk of churn.
 - Monitor changes in customer segments over time to identify shifts in engagement behavior.
+
+## Analysis 3: Customer Inactivity Monitoring
+
+**Business Problem**
+
+Customer inactivity is often an early indicator of churn. Without a process for monitoring dormant accounts, the business risks losing customers before intervention measures can be taken.
+
+**Business Question**
+
+Which active customer accounts have not recorded any inflow transactions in the last 365 days?
+
+**Approach**
+
+I analyzed savings and investment account activity to determine the most recent transaction date associated with each account. Accounts with no inflow activity within the last 365 days were flagged as inactive and ranked based on the number of inactivity days.
+
+**Analytical Methods**
+
+- Common Table Expressions (CTEs)
+- Date-Based Analysis
+- Transaction Monitoring
+- Account Activity Assessment
+- Churn Risk Identification
+
+**SQL Query**
+
+-- Q3: Account Inactivity Alert
+-- Flags savings and investment accounts with no successful inflow transaction in the last 365 days
+-- Last transaction date is sourced from both plans_plan and savings_savingsaccount via COALESCE
+-- LEFT JOIN between CTEs ensures accounts present in only one table are not silently dropped
+
+WITH plans_max_transactions AS (
+    SELECT
+        p.id,
+        p.owner_id,
+        p.is_a_fund,
+        p.is_regular_savings,
+        MAX(p.last_charge_date) AS last_transaction_date
+
+    FROM plans_plan p
+    JOIN savings_savingsaccount s
+        ON p.id = s.plan_id
+    WHERE (p.is_a_fund = 1 OR p.is_regular_savings = 1)
+      AND s.transaction_status LIKE "%success%"
+    GROUP BY p.id, p.owner_id, p.is_a_fund, p.is_regular_savings
+),
+
+savings_max_transactions AS (
+    SELECT
+        s.plan_id,
+        s.owner_id,
+        MAX(DATE(s.transaction_date)) AS savings_last_transaction_date
+
+    FROM savings_savingsaccount s
+    WHERE s.transaction_status LIKE "%success%"
+    GROUP BY s.plan_id, s.owner_id
+)
+
+SELECT
+    pmt.id                                                                      AS plan_id,
+    pmt.owner_id                                                                AS owner_id,
+    CASE
+        WHEN pmt.is_regular_savings = 1 THEN "Savings"
+        WHEN pmt.is_a_fund = 1          THEN "Investment"
+    END                                                                         AS type,
+    COALESCE(pmt.last_transaction_date, smt.savings_last_transaction_date)      AS last_transaction_date,
+    DATEDIFF(
+        CURRENT_DATE,
+        COALESCE(pmt.last_transaction_date, smt.savings_last_transaction_date)
+    )                                                                           AS inactivity_days
+
+FROM plans_max_transactions pmt
+LEFT JOIN savings_max_transactions smt   -- LEFT JOIN preserves plans that appear in only one source
+    ON pmt.id = smt.plan_id
+
+WHERE DATEDIFF(
+    CURRENT_DATE,
+    COALESCE(pmt.last_transaction_date, smt.savings_last_transaction_date)
+) > 365
+
+ORDER BY inactivity_days DESC;
+
+**Visualization**
+
+Figure 2: Customer Churn Risk by Product Type
+
+Dormant customers were segmented by inactivity duration and product type to identify where customer disengagement is most prevalent.
+
+https://github.com/SamuelEssien98/customer-lifecycle-analytics-sql/blob/8cd65d820f7f16c6ed7edd06e6c69f20b8ebdf05/images/Figure%202.png
+
+**Key Insight**
+
+Savings products account for the majority of dormant customers across all inactivity bands. The highest concentration of inactive customers occurs within the 1–2 year band, with 339 dormant savings customers and 199 dormant investment customers. This suggests that customer disengagement is concentrated among relatively recent users and presents an opportunity for proactive re-engagement initiatives.
+
+**Business Value**
+
+The analysis indicates that inactivity is more pronounced among savings customers than investment customers. Since most dormant customers fall within the 1–2 year inactivity range, the business has a significant opportunity to recover customers before they become permanently disengaged.
+
+**Potential Recommendations**
+
+- Prioritize reactivation campaigns targeting dormant savings customers, where inactivity is most prevalent.
+- Implement automated alerts when customers approach one year of inactivity.
+- Investigate differences in engagement between savings and investment customers to identify behaviors associated with stronger retention.
+- Establish inactivity monitoring dashboards to track churn risk and reactivation performance over time.
+
