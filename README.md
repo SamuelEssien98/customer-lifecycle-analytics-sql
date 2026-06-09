@@ -88,11 +88,11 @@ To answer this question, I identified customers with funded savings plans and cu
 WITH savings_customers AS (
     SELECT
         p.owner_id,
-        COUNT(DISTINCT p.id)     AS savings_count,
-        SUM(s.confirmed_amount)  AS savings_deposit   -- confirmed_amount is the inflow field (in kobo)
-
+        COUNT(DISTINCT p.id) AS savings_count,
+        SUM(s.confirmed_amount) AS savings_deposit   -- confirmed_amount is the inflow field (in kobo)
+        
     FROM plans_plan p
-    JOIN savings_savingsaccount s
+      JOIN savings_savingsaccount s
         ON p.id = s.plan_id
     WHERE s.transaction_status LIKE "%success%"   -- handles status variants e.g. "monnify_success"
       AND p.is_regular_savings = 1
@@ -102,8 +102,8 @@ WITH savings_customers AS (
 investment_customers AS (
     SELECT
         p.owner_id,
-        COUNT(DISTINCT p.id)  AS investment_count,
-        SUM(p.amount)         AS investment_deposit   -- plans_plan.amount reflects committed fund value
+        COUNT(DISTINCT p.id) AS investment_count,
+        SUM(p.amount) AS investment_deposit   -- plans_plan.amount reflects committed fund value
 
     FROM plans_plan p
     JOIN savings_savingsaccount s
@@ -114,11 +114,11 @@ investment_customers AS (
 )
 
 SELECT
-    sc.owner_id                                    AS owner_id,
-    CONCAT(uc.first_name, ' ', uc.last_name)       AS name,
-    sc.savings_count                               AS savings_count,
-    ic.investment_count                            AS investment_count,
-    (sc.savings_deposit + ic.investment_deposit)   AS total_deposits
+    sc.owner_id AS owner_id,
+    CONCAT(uc.first_name, ' ', uc.last_name) AS name,
+    sc.savings_count AS savings_count,
+    ic.investment_count AS investment_count,
+    (sc.savings_deposit + ic.investment_deposit) AS total_deposits
 
 FROM savings_customers sc
 JOIN investment_customers ic
