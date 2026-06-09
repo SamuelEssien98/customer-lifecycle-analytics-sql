@@ -81,6 +81,7 @@ To answer this question, I identified customers with funded savings plans and cu
 - Sorting and Ranking
 
 **SQL Query**
+```sql
 -- Q1: High-Value Customers with Multiple Products
 -- Identifies customers holding both a funded savings plan and a funded investment plan
 -- Ordered by total deposits descending to surface highest-value cross-sell opportunities
