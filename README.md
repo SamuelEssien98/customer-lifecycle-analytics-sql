@@ -128,6 +128,7 @@ JOIN users_customuser uc
     ON sc.owner_id = uc.id
 
 ORDER BY total_deposits DESC;
+```
 
 **Visualization**
 
@@ -177,7 +178,7 @@ I calculated the number of transactions performed by each customer on a monthly 
 - Customer Segmentation Logic
 
 **SQL Query**
-
+```sql
 -- Q2: Transaction Frequency Segmentation
 -- Segments customers by average monthly transaction frequency
 -- Uses DATE_FORMAT('%Y-%m') to group by year-month, preventing cross-year month collapsing
@@ -224,6 +225,7 @@ GROUP BY
     END
 
 ORDER BY avg_transactions_per_month DESC;
+```
 
 **Visualization**
 
@@ -271,7 +273,7 @@ I analyzed savings and investment account activity to determine the most recent 
 - Churn Risk Identification
 
 **SQL Query**
-
+```sql
 -- Q3: Account Inactivity Alert
 -- Flags savings and investment accounts with no successful inflow transaction in the last 365 days
 -- Last transaction date is sourced from both plans_plan and savings_savingsaccount via COALESCE
@@ -327,7 +329,7 @@ WHERE DATEDIFF(
 ) > 365
 
 ORDER BY inactivity_days DESC;
-
+```
 **Visualization**
 
 Figure 3: Customer Churn Risk by Product Type
@@ -374,7 +376,7 @@ I combined customer tenure information with transaction history to estimate Cust
 - Business Metric Development
 
 **SQL Query**
-
+```sql
 -- Q4: Customer Lifetime Value (CLV) Estimation
 -- Estimates CLV per active customer using tenure and transaction behaviour
 -- Formula: CLV = (total_transactions / tenure_months) * 12 * avg_profit_per_transaction
@@ -417,7 +419,7 @@ JOIN transactions t
     ON a.id = t.owner_id
 
 ORDER BY estimated_clv DESC;
-
+```
 **Visualization**
 
 Figure 4: Customer Lifetime Value Distribution by Segment
