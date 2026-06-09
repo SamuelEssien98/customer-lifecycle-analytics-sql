@@ -187,7 +187,7 @@ WITH monthly_transactions AS (
     SELECT
         s.owner_id,
         DATE_FORMAT(s.transaction_date, '%Y-%m') AS 'year_month',
-        COUNT(s.id)                               AS transaction_count
+        COUNT(s.id) AS transaction_count
 
     FROM savings_savingsaccount s
     WHERE s.transaction_status LIKE "%success%"
@@ -210,7 +210,7 @@ SELECT
         ELSE "Low Frequency"
     END                              AS frequency_category,
 
-    COUNT(DISTINCT uc.id)            AS customer_count,
+    COUNT(DISTINCT uc.id) AS customer_count,
     AVG(uat.avg_monthly_transactions) AS avg_transactions_per_month
 
 FROM users_customuser uc
@@ -307,17 +307,17 @@ savings_max_transactions AS (
 )
 
 SELECT
-    pmt.id                                                                      AS plan_id,
-    pmt.owner_id                                                                AS owner_id,
+    pmt.id AS plan_id,
+    pmt.owner_id AS owner_id,
     CASE
         WHEN pmt.is_regular_savings = 1 THEN "Savings"
         WHEN pmt.is_a_fund = 1          THEN "Investment"
-    END                                                                         AS type,
-    COALESCE(pmt.last_transaction_date, smt.savings_last_transaction_date)      AS last_transaction_date,
+    END AS type,
+    COALESCE(pmt.last_transaction_date, smt.savings_last_transaction_date) AS last_transaction_date,
     DATEDIFF(
         CURRENT_DATE,
         COALESCE(pmt.last_transaction_date, smt.savings_last_transaction_date)
-    )                                                                           AS inactivity_days
+    ) AS inactivity_days
 
 FROM plans_max_transactions pmt
 LEFT JOIN savings_max_transactions smt   -- LEFT JOIN preserves plans that appear in only one source
@@ -385,8 +385,8 @@ I combined customer tenure information with transaction history to estimate Cust
 WITH transactions AS (
     SELECT
         s.owner_id,
-        COUNT(s.id)                          AS total_transactions,
-        AVG(s.confirmed_amount * 0.001)      AS avg_profit_per_transaction   -- 0.1% of value in naira
+        COUNT(s.id) AS total_transactions,
+        AVG(s.confirmed_amount * 0.001) AS avg_profit_per_transaction   -- 0.1% of value in naira
 
     FROM savings_savingsaccount s
     WHERE s.transaction_status LIKE "%success%"   -- handles status field variants
@@ -396,7 +396,7 @@ WITH transactions AS (
 account_tenure AS (
     SELECT
         uc.id,
-        CONCAT(uc.first_name, ' ', uc.last_name)          AS name,
+        CONCAT(uc.first_name, ' ', uc.last_name) AS name,
         DATEDIFF(CURRENT_DATE, DATE(uc.date_joined)) / 30  AS tenure_months   -- DATE() handles mixed datetime formats
 
     FROM users_customuser uc
@@ -404,7 +404,7 @@ account_tenure AS (
 )
 
 SELECT
-    a.id                AS customer_id,
+    a.id AS customer_id,
     a.name,
     a.tenure_months,
     t.total_transactions,
@@ -412,7 +412,7 @@ SELECT
         WHEN a.tenure_months > 0
             THEN ROUND((t.total_transactions / a.tenure_months) * 12 * t.avg_profit_per_transaction, 2)
         ELSE 0           -- guard against division by zero for very recently signed-up customers
-    END                 AS estimated_clv
+    END AS estimated_clv
 
 FROM account_tenure a
 JOIN transactions t
